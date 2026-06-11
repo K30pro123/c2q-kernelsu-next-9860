@@ -1,0 +1,77 @@
+name: Build Kernel for N9860
+
+on:
+
+  workflow_dispatch: # 手动触发
+  
+
+
+jobs:
+
+  build:
+  
+    runs-on: ubuntu-22.04
+    
+    steps:
+    
+      - name: Checkout
+      
+        uses: actions/checkout@v4
+        
+        with:
+        
+          submodules: true
+          
+
+
+      - name: Install Dependencies
+      
+        run: |
+        
+          sudo apt-get update
+          
+          sudo apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev p7zip-full
+          
+
+
+      - name: Build Kernel
+      
+        run: |
+        
+          chmod +x build_kernel.sh
+          
+          ./build_kernel.sh
+          
+
+
+      - name: Upload Result
+      
+        uses: actions/upload-artifact@v4
+        
+        with:
+        
+          name: N9860-KernelSU-Next
+          
+          path: c2q_n9860_ksunext.zip
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
