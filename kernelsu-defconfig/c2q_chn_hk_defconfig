@@ -1,0 +1,1 @@
+$(cat /home/ubuntu/full_defconfig.txt)
